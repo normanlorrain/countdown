@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "countdown"
+version = "0.0.20"
+authors = [
+  { name="Norman Lorrain", email="normanlorrain@gmail.com" },
+]
+description = "A countdown clock for kiosks, digital signage."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'click',
+  'pygame',
+]
+
+
+[project.urls]
+Homepage = "https://github.com/normanlorrain/countdown"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/countdown"]
+
+[project.scripts]
+# See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#creating-executable-scripts
+# This determines the contents of ~.local/bin/countdown
+# We'll end up with this:
+#    from countdown.cli import cli
+countdown = "countdown.cli:cli"
