@@ -11,7 +11,7 @@ WIDTH, HEIGHT = (1280, 720)
 # initialize here.
 def init():
     global displaySurface
-    global WIDTH, HEIGHT
+    global WIDTH, HEIGHT,X,Y
 
     # pygame setup
     pygame.init()

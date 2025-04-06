@@ -28,7 +28,9 @@ NEXT = auto()
 PREVIOUS = auto()
 
 
+
 def init():
+    global X,Y
 
     screen.init()  # Needs to be before the rest, so Pygame gets initalized.
     text.init()
@@ -37,6 +39,11 @@ def init():
     CLOCK_INTERVAL =  1000  # msec
     pygame.key.set_repeat(1000, 100)
 
+    message = text.createMessage(f"00:00:00:00")
+    width = message.get_width()
+    height = message.get_height()   
+    X = screen.WIDTH // 2 - width // 2
+    Y = screen.HEIGHT // 2 - height // 2
 
 def refreshScreen(direction=NEXT):
     # Blank the screen
@@ -46,16 +53,10 @@ def refreshScreen(direction=NEXT):
     days = td.days
     hours, remainder = divmod(td.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-    pad = 10
     message = text.createMessage(f"{days:02d}:{hours:02d}:{minutes:02d}:{seconds:02d}")
-    width = message.get_width()
-    height = message.get_height()   
-    x = screen.WIDTH // 2 - width // 2
-    y = screen.HEIGHT // 2 - height // 2
-    screen.displaySurface.blit(message, (x, y))
+    screen.displaySurface.blit(message, (X, Y))
 
     pygame.display.flip()
-
 
 
 
