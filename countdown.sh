@@ -3,5 +3,5 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/.venv/bin/activate"
 
-countdown "$@"
+countdown -t "Cantarell, Light" -s 100 -f
 

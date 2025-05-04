@@ -39,7 +39,7 @@ def init():
     CLOCK_INTERVAL =  1000  # msec
     pygame.key.set_repeat(1000, 100)
 
-    message = text.createMessage(f"00:00:00:00")
+    message = text.createMessage(f"00:00:00")
     width = message.get_width()
     height = message.get_height()   
     X = screen.WIDTH // 2 - width // 2
@@ -53,7 +53,7 @@ def refreshScreen(direction=NEXT):
     days = td.days
     hours, remainder = divmod(td.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-    message = text.createMessage(f"{days:02d}:{hours:02d}:{minutes:02d}:{seconds:02d}")
+    message = text.createMessage(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
     screen.displaySurface.blit(message, (X, Y))
 
     pygame.display.flip()
