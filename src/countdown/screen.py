@@ -1,17 +1,18 @@
 # An interface layer for Pygames management of the window/screen.
 
 import pygame
-from countdown import config
+from countdown import config, screen
 from countdown import log
 
 WIDTH, HEIGHT = (1280, 720)
 
+MSG_DEST = (0,0) # coordinates of the message destination 
 
 # Since the configuration isn't initialized yet, we need to explicitly
 # initialize here.
 def init():
     global displaySurface
-    global WIDTH, HEIGHT,X,Y
+    global WIDTH, HEIGHT
 
     # pygame setup
     pygame.init()
@@ -32,3 +33,13 @@ def init():
 
 def rect():
     return pygame.Rect(0, 0, WIDTH, HEIGHT)
+
+
+def get_destination(message):
+    global MSG_DEST
+    width = message.get_width()
+    height = message.get_height()
+    x = screen.WIDTH // 2 - width // 2
+    y = screen.HEIGHT // 2 - height // 2
+    MSG_DEST = (x, y)
+    return MSG_DEST

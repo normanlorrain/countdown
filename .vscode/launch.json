@@ -13,11 +13,11 @@
       "args": []
     },
     {
-      "name": "Test: size, typeface",
+      "name": "Test: pointsize, typeface",
       "type": "debugpy",
       "request": "launch",
       "module": "countdown",
-      "args": ["-s", "20", "-t", "Courier"]
+      "args": ["-p", "20", "-t", "Courier"]
     },
         {
       "name": "Test: fullscreen",

@@ -12,11 +12,11 @@ from countdown import text
 from countdown import config
 from countdown import log
 from countdown import signal
+from countdown.screen import get_destination
 
 
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"  # suppresses Pygame message on import
 
-DOOMSDAY = datetime(2025, 4, 28, 0, 0, 0)  # YYYY, MM, DD, HH, MM, SS
 
 CLOCK_EVENT = pygame.event.custom_type()
 CLOCK_INTERVAL = None
@@ -30,36 +30,35 @@ PREVIOUS = auto()
 
 
 def init():
-    global X,Y
 
-    screen.init()  # Needs to be before the rest, so Pygame gets initalized.
+    screen.init()  # Needs to be before the rest, so Pygame gets initialised.
     text.init()
     signal.init()
     global CLOCK_INTERVAL
     CLOCK_INTERVAL =  1000  # msec
     pygame.key.set_repeat(1000, 100)
 
-    message = text.createMessage(f"00:00:00")
-    width = message.get_width()
-    height = message.get_height()   
-    X = screen.WIDTH // 2 - width // 2
-    Y = screen.HEIGHT // 2 - height // 2
 
-def refreshScreen(direction=NEXT):
+def refreshScreen():
     # Blank the screen
     screen.displaySurface.fill((0, 0, 0))
   
-    td = DOOMSDAY - datetime.now()
+    td = config.EXPIRATION - datetime.now()
     days = td.days
     hours, remainder = divmod(td.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-    message = text.createMessage(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
-    screen.displaySurface.blit(message, (X, Y))
+    if days > 0:
+        message = text.createMessage(f"{days:02d}:{hours:02d}:{minutes:02d}:{seconds:02d}")
+    elif days == 0:
+        message = text.createMessage(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+    else: # negative.  We are past the end.
+        message = text.createMessage(f"00:00:00")
+    
+    if td.seconds == 0 or screen.MSG_DEST == (0, 0):
+        screen.get_destination(message)
+    screen.displaySurface.blit(message, screen.MSG_DEST)
 
     pygame.display.flip()
-
-
-
 
 def run() -> bool:
     global pauseState

@@ -4,6 +4,7 @@
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
     "cSpell.words": [
+        "freesans",
         "pygame"
     ],
     "flake8.args": [

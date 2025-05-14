@@ -44,9 +44,6 @@ def init():
     # Root logger gets everything.  Handlers defined below will filter it out...
     logging.getLogger("").setLevel(logging.DEBUG)
 
-    # The exifread package is very chatty for this application.
-    # Not everything has EXIF data.
-    logging.getLogger("exifread").setLevel(logging.ERROR)
 
     debugHandler = RotatingFileHandler(
         Path(DEBUG_LOG), maxBytes=MAX_BYTES, backupCount=BACKUP_COUNT, encoding="utf-8"

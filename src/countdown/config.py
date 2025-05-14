@@ -2,31 +2,29 @@
 # merging settings from the config file and the command line.
 # Configuration attributes are set as attributes of this module.
 
-import pathlib
-import enum
-import tomllib
+
 import sys
-from types import SimpleNamespace
+from datetime import datetime
 from countdown import log
 
 this_mod = sys.modules[__name__]
 
-
+EXPIRATION = None  # Placeholder for the countdown datetime
 
 # Configuration file string constants
 # These are also used as command-line Click options
 # See cli.py
 FULLSCREEN = "fullscreen"
-SIZE = "size"
+POINTSIZE = "pointsize"
 TYPEFACE = "typeface"
+EXPIRATION = "expiration"
 
-
-# General defaults
-defaults = {
-    FULLSCREEN: False,
-    SIZE: 120,
-    TYPEFACE: "freesans",
-}
+YEAR = "year"
+MONTH = "month"
+DAY = "day"     
+HOUR = "hour"
+MINUTE = "minute"
+SECOND = "second"
 
 
 
@@ -40,4 +38,12 @@ def init(ctx):
     for param, value in ctx.params.items():
         setattr(this_mod, param, value)
 
- 
+    global EXPIRATION
+    EXPIRATION = datetime(
+        year=getattr(this_mod, YEAR),
+        month=getattr(this_mod, MONTH),
+        day=getattr(this_mod, DAY),
+        hour=getattr(this_mod, HOUR),
+        minute=getattr(this_mod, MINUTE),
+        second=getattr(this_mod, SECOND))
+    log.info(f"Countdown End: {EXPIRATION}")

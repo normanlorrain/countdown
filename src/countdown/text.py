@@ -16,7 +16,7 @@ BLUE = (0, 173, 240)
 
 def init():
     pygame.font.init()
-    font[NORMAL] = pygame.font.SysFont(config.typeface, config.size)
+    font[NORMAL] = pygame.font.SysFont(config.typeface, config.pointsize)
     
     
 
