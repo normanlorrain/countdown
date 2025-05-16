@@ -21,12 +21,6 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"  # suppresses Pygame message o
 CLOCK_EVENT = pygame.event.custom_type()
 CLOCK_INTERVAL = None
 
-pauseState = False
-showYearState = False
-
-NEXT = auto()
-PREVIOUS = auto()
-
 
 
 def init():
