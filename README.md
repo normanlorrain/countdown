@@ -1,5 +1,8 @@
 # countdown
-Full screen countdown timer
+A visual countdown timer.  Python and PyGame.
+
+Counts down and displays days, hours, minutes, seconds.  
+
 
 ```bash
 Usage: countdown [OPTIONS]
@@ -21,3 +24,4 @@ Options:
 ```
 
 
+![screen shot](docs/screenshot.png)
