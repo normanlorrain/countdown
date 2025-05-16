@@ -13,6 +13,13 @@
       "args": []
     },
     {
+      "name": "Test: specific time",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "countdown",
+      "args": ["-y", "2025", "-m", "5", "-d", "17", "-h", "9", "-m", "42", "-s", "0", "-t", "Arial", "-p", "200"]
+    },
+    {
       "name": "Test: pointsize, typeface",
       "type": "debugpy",
       "request": "launch",
