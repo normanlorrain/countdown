@@ -48,15 +48,21 @@ def refreshScreen():
     hours, remainder = divmod(td.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     if days > 0:
-        message = text.createMessage(f"{days:02d}:{hours:02d}:{minutes:02d}:{seconds:02d}")
+        message = f"{days:02d}:{hours:02d}:{minutes:02d}:{seconds:02d}"
     elif days == 0:
-        message = text.createMessage(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+        message = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     else: # negative.  We are past the end.
-        message = text.createMessage(f"00:00:00")
+        message = f"00:00:00"
     
-    if td.seconds == 0 or screen.MSG_DEST == (0, 0):
-        screen.get_destination(message)
-    screen.displaySurface.blit(message, screen.MSG_DEST)
+    msgSurface = text.createMessage(message)
+
+    # Once a minute, calculate screen position. Depending on the font size, 
+    # the "centering" may be different. We could do this for every second, but it 
+    # would be jittery.
+    # This handles transition when the countdown drops to less than a day.
+    if seconds == 59 or screen.MSG_DEST == (0, 0):
+        screen.get_destination(msgSurface)
+    screen.displaySurface.blit(msgSurface, screen.MSG_DEST)
 
     pygame.display.flip()
 
